@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Reeact tutorial</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/react/0.14.7/react-dom.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.2/browser.min.js"></script>
+    <link rel="stylesheet" type="text/css"  href="lesson5challengestyling.css"></style>
+</head>
+
+<body>
+    <div id="app"></div>
+    <script type=text/babel>
+    var CounterComponent = React.createClass({
+
+        getInitialState: function() {
+            return {
+                 counter: 0
+            }
+        },      
+     
+        addValue: function(plusCount) {
+           this.setState({
+                counter: this.state.counter + plusCount
+           });
+        },
+
+        getDefaultProps: function() {
+            return {
+                valueOne: 1,
+                valueTwo: 5,
+                valueThree: 10,
+                text: 'Add'
+            }
+        },
+
+        alert: function() {
+
+            alert('Button Clicked');
+        },
+
+        render: function() {
+            console.log(this);          
+            return (
+                  <div className="container">
+                    <p>Count: {this.state.counter} </p>
+                    <Button style="btn blue-btn"    value={this.props.valueOne}     text={`${this.props.text} ${this.props.valueOne}`}      clickHandler={this.addValue.bind(this, this.props.valueOne)} />
+                    <Button style="btn green-btn"   value={this.props.valueTwo}     text={`${this.props.text} ${this.props.valueTwo}`}      clickHandler={this.addValue.bind(this, this.props.valueTwo)} />
+                    <Button style="btn purple-btn"  value={this.props.valueThree}   text={`${this.props.text} ${this.props.valueThree}`}    clickHandler={this.addValue.bind(this, this.props.valueThree)} />
+                    <Button text="Alert" clickHandler={this.alert} />
+                  </div>
+                )
+            }
+        });
+
+    var Button = function(props) {
+        return (
+            <button className={props.style} value={props.value} onClick={props.clickHandler}> {props.text} </button>
+        )
+    };
+
+    ReactDOM.render(
+        <CounterComponent  valueOne={100} valueTwo={1000} valueThree={10000} />, 
+        document.getElementById('app') 
+    );
+
+    </script>
+</body>
+
+</html>
