@@ -13,7 +13,7 @@ class App extends Component {
       pokemon: [],
       activePage: 1,
       limit: 50,
-      offset: 50,
+      offset: 0,
       totalPages: 0,  
       count: 0,
       loaded: false,
@@ -23,7 +23,8 @@ class App extends Component {
     this.loadPokemon = this.loadPokemon.bind(this);
     this.handlePaginationSelect = this.handlePaginationSelect.bind(this);
     this.handleLimitChange = this.handleLimitChange.bind(this);
-    this.toggleModal = this.toggleModal.bind(this);
+    this.handleModalOpen = this.handleModalOpen.bind(this);
+    this.handleModalClose = this.handleModalClose.bind(this);
   }
 
   handlePaginationSelect(page) {
@@ -35,7 +36,6 @@ class App extends Component {
       activePage: page
     })
   }
-
 
   loadPokemon(url) {
     fetch(url)
@@ -69,13 +69,17 @@ class App extends Component {
     })
   }
 
-  toggleModal() {
+  handleModalOpen() {
     this.setState({
       showModal: true
-    })
-    
+    });    
   }
 
+  handleModalClose() {
+    this.setState({
+      showModal: false
+    });    
+  }
 
 
   render() {
@@ -102,7 +106,8 @@ class App extends Component {
       />
 
       <PokemonModal 
-        toggleModal={this.toggleModal} 
+        openModal={this.handleModalOpen} 
+        closeModal={this.handleModalClose} 
         showModal={this.state.showModal} 
       />
 
