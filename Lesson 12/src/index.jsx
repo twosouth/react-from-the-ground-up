@@ -6,6 +6,7 @@ const Hello = () => {
         <div>Hello world!</div>
     )
 }
+// a change
 
 ReactDOM.render(
     <Hello />,
